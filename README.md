@@ -12,6 +12,12 @@ fi
 It is possible to use `errexit`:
 
 ```bash
+false || errexit 'error: message'
+```
+
+Or just:
+
+```bash
 false || errexit -e 'message'
 ```
 
