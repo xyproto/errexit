@@ -4,7 +4,7 @@ Instead of doing this in a script:
 
 ```bash
 if false; then
-  echo 'error: something went wrong' >&2
+  echo 'error: message' >&2
   exit 1
 fi
 ```
@@ -12,10 +12,10 @@ fi
 It is possible to use `errexit`:
 
 ```bash
-false || errexit -e 'something went wrong'
+false || errexit -e 'message'
 ```
 
-This will print `error: something went wrong` to `stderr`, send `SIGPIPE` to the parent process and exit with error code `141`.
+This will print `error: message` to `stderr`, send `SIGPIPE` to the parent process and exit with error code `141`.
 
 ### Installation
 
