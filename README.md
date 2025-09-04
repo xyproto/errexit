@@ -3,7 +3,7 @@
 Instead of doing this in a script:
 
 ```bash
-if something; then
+if false; then
   echo 'error: something went wrong' >&2
   exit 1
 fi
@@ -12,7 +12,16 @@ fi
 It is possible to use `errexit`:
 
 ```bash
-something || errexit -e 'something went wrong' 1
+false || errexit -e 'something went wrong'
+```
+
+This will print `error: something went wrong` to `stderr`, send `SIGPIPE` to the parent process and exit with error code `141`.
+
+### Installation
+
+```
+make
+sudo PREFIX=/usr/local make install
 ```
 
 ### General info
