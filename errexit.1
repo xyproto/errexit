@@ -1,0 +1,63 @@
+.TH ERREXIT 1 "2025-09-04" "errexit 1.0.0" "User Commands"
+.SH NAME
+errexit \- print an error message and terminate the parent process
+.SH SYNOPSIS
+.B errexit
+.RI [ OPTIONS ]
+.I string
+.RI [ exit_code ]
+.SH DESCRIPTION
+.B errexit
+prints a message to standard error and terminates the parent process with the specified exit code (default 1). This utility is designed to replace the common bash pattern of printing an error message followed by exiting the script.
+
+Unlike normal programs that only exit themselves,
+.B errexit
+sends a SIGTERM signal to its parent process, effectively terminating bash scripts that call it.
+.SH OPTIONS
+.TP
+.BR \-e ", " \-\-error
+Prefix the message with "error: ".
+.TP
+.BR \-E ", " \-\-Error
+Prefix the message with "Error: ".
+.TP
+.BR \-v ", " \-\-version
+Show version information and exit.
+.TP
+.BR \-h ", " \-\-help
+Show help message and exit.
+.SH ARGUMENTS
+.TP
+.I string
+The error message to print to stderr.
+.TP
+.I exit_code
+Optional exit code (default: 1). Must be an integer.
+.SH EXAMPLES
+Print a simple error message and exit with code 1:
+.RS
+.B errexit "file not found"
+.RE
+
+Print an error with "error: " prefix and exit with code 2:
+.RS
+.B errexit \-e "could not read config" 2
+.RE
+
+Print an error with "Error: " prefix:
+.RS
+.B errexit \-E "invalid configuration"
+.RE
+.SH EXIT STATUS
+.B errexit
+itself always exits with the specified exit code after terminating the parent process.
+.SH NOTES
+This utility is specifically designed for use in bash scripts where you want to terminate the entire script, not just print an error message. The parent process termination is achieved by sending SIGTERM to the parent PID.
+
+Be cautious when using this utility interactively, as it will attempt to terminate your shell.
+.SH AUTHOR
+Alexander F. Rødseth <xyproto@archlinux.org>
+.SH SEE ALSO
+.BR kill (1),
+.BR exit (3),
+.BR signal (7)
