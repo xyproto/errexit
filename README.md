@@ -19,7 +19,7 @@ This will print `error: message` to `stderr`, send `SIGPIPE` to the parent proce
 
 ### Code
 
-This is the main thing that this program is doing:
+This is the main thing that `errexit` is doing:
 
 ```c
 fprintf(stderr, "%s%s\n", prefix, message);
