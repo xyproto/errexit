@@ -17,6 +17,20 @@ false || errexit -e 'message'
 
 This will print `error: message` to `stderr`, send `SIGPIPE` to the parent process and exit with error code `141`.
 
+### C code
+
+This is the main thing that this program is doing:
+
+```c
+fprintf(stderr, "%s%s\n", prefix, message);
+pid_t ppid = getppid();
+if (ppid > 1) {
+    if (kill(ppid, SIGPIPE) != 0) {
+        kill(ppid, SIGKILL);
+    }
+}
+```
+
 ### Installation
 
 ```
