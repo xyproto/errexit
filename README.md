@@ -17,7 +17,7 @@ false || errexit -e 'message'
 
 This will print `error: message` to `stderr`, send `SIGPIPE` to the parent process and exit with error code `141`.
 
-### C code
+### Code
 
 This is the main thing that this program is doing:
 
